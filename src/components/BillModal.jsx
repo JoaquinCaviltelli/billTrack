@@ -73,7 +73,7 @@ const BillModal = ({ isOpen, onClose, onSave, billData }) => {
           <select
             value={month}
             onChange={(e) => setMonth(e.target.value)}
-            className="border-b-2 pt-6 pl-2 pb-2 text-lg w-full outline-none text-gray-700 font-semibold col-span-4"
+            className="border-b-2 pt-6 pl-2 pb-2 text-lg w-full outline-none bg-white text-gray-700 font-semibold col-span-4"
           >
             {monthsInSpanish.map((monthName, index) => (
               <option
@@ -88,7 +88,7 @@ const BillModal = ({ isOpen, onClose, onSave, billData }) => {
           <select
             value={year}
             onChange={(e) => setYear(e.target.value)}
-            className="border-b-2 pt-6 pl-2 pb-2 text-lg w-full outline-none text-gray-700 font-semibold col-span-2"
+            className="border-b-2 pt-6 pl-2 pb-2 text-lg w-full outline-none bg-white text-gray-700 font-semibold col-span-2"
           >
             {Array.from({ length: 5 }, (_, i) => (
               <option key={i} value={new Date().getFullYear() - i}>

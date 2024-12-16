@@ -52,17 +52,21 @@ const Home = () => {
     <div className="p-6 max-w-5xl m-auto">
       <div className="flex w-full items-center justify-between">
         <button
-          className="bg-gray-800 text-white font-black py-1 px-2 rounded-l"
+          className="bg-gray-800 text-white w-10 h-10 flex justify-center items-center rounded"
           onClick={() => setCurrentMonth(currentMonth.clone().subtract(1, "month"))}
         >
-          &lt;
+          <span className="material-symbols-outlined">
+          arrow_left
+</span>
         </button>
-        <p className="text-lg text-gray-700 font-bold mx-4">{`${monthsInSpanish[currentMonth.month()]} ${currentMonth.year()}`}</p>
+        <p className="text-lg text-gray-800 font-bold mx-4">{`${monthsInSpanish[currentMonth.month()]} ${currentMonth.year()}`}</p>
         <button
-          className="bg-gray-800 text-white font-black py-1 px-2 rounded-r"
+          className="bg-gray-800 text-white w-10 h-10 flex justify-center items-center rounded"
           onClick={() => setCurrentMonth(currentMonth.clone().add(1, "month"))}
         >
-          &gt;
+          <span className="material-symbols-outlined">
+          arrow_right
+</span>
         </button>
       </div>
 
@@ -81,7 +85,7 @@ const Home = () => {
       </div>
 
       <button
-        className="bg-gray-800 w-full font-bold text-white px-4 py-2 rounded"
+        className="bg-gray-800 w-full font-semibold text-white px-4 py-3 rounded"
         onClick={() => setModalOpen(true)}
       >
         Agregar servicio
