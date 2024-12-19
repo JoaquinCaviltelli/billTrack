@@ -78,7 +78,10 @@ const Home = () => {
 
   return (
     <div className="w-full inset-0 fixed overflow-y-scroll   ">
-      <div className="max-w-4xl mx-auto bg-gradient-to-tl from-[#5B50D9] to-[#302A73]">
+      <div className="max-w-4xl mx-auto ">
+        <div className="pb-14 bg-gradient-to-tl from-[#5B50D9] to-[#302A73]">
+
+       
         {/* Encabezado */}
         <div className="flex items-center gap-3 p-6 justify-between">
           <p className="text-white font-semibold">Facturas de servicios</p>
@@ -90,7 +93,7 @@ const Home = () => {
         </div>
 
         {/* Navegación entre meses */}
-        <div className="flex w-full items-center justify-between px-6 mt-12">
+        <div className="flex w-full items-center justify-between px-6 mt-12 ">
           <button
             className="bg-white text-[#302A73]  w-7 h-7 flex justify-center items-center rounded"
             onClick={() =>
@@ -113,18 +116,20 @@ const Home = () => {
         </div>
 
         {/* Total */}
-        <div className="flex text-white justify-center gap-1 items-start mb-14 px-6">
-          <p className="text-5xl font-bold">
-            ${currentTotalAmount.toLocaleString("es-ES")}
-          </p>
-
+        <div className=" text-white  px-6 text-center ">
+          <span className="text-5xl font-bold relative ">
+          <span className="text-5xl font-bold absolute -left-8">$</span>
+            {currentTotalAmount.toLocaleString("es-ES")}
+          </span>
           {/* Porcentaje de cambio en el total */}
           {previousTotalAmount !== 0 && currentTotalAmount !== 0 && (
-            <p className="text-md font-semibold ">
+            <span className="text-md font-semibold absolute">
               {totalPercentageChange >= 0 ? "+" : ""}
               {totalPercentageChange.toFixed(1)}%
-            </p>
+            </span>
           )}
+
+        </div>
         </div>
         <div className="bg-white p-6 py-10 rounded-t ">
           {/* Botón para agregar servicio */}

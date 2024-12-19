@@ -216,32 +216,31 @@ const ExtractoBancario = () => {
 
   return (
     <div className="w-full inset-0 fixed overflow-y-scroll  ">
+      <div className="max-w-4xl m-auto">
+        <div className="bg-gradient-to-tl from-[#d95050] to-[#732a2a]">
 
-      <div className="max-w-4xl m-auto bg-gradient-to-tl from-[#d95050] to-[#732a2a]">
-      {/* Mostrar saldo final */}
-      <div className="flex items-center gap-3 p-6 justify-between">
-<p className="text-white font-semibold">Detalle bancario</p>
-      <Link to="/" className="">
-    
-        <span className="material-symbols-outlined text-[#732a2a] text-[34px] bg-white p-3 rounded-full shadow">
-          docs
-        </span>
+        {/* Mostrar saldo final */}
+        <div className="flex items-center gap-3 p-6 justify-between">
+          <p className="text-white font-semibold">Detalle bancario</p>
+          <Link to="/" className="">
+            <span className="material-symbols-outlined text-[#732a2a] text-[34px] bg-white p-3 rounded-full shadow">
+              docs
+            </span>
+          </Link>
+        </div>
+        <div className=" pt-14 pb-14 flex flex-col justify-center items-center text-white gap-2">
+          <p className="leading-3  font-semibold text-sm">
+            {moment(fecha).format("DD")} de{" "}
+            {monthsInSpanish[moment(fecha).format("MM") - 1]}
+          </p>
+          <span className="text-5xl font-bold">
+            ${saldo.toLocaleString("es-ES")}
+          </span>
+        </div>
+        </div>
 
-      </Link>
-      </div>
-      <div className=" pt-14 pb-14 flex flex-col justify-center items-center text-white gap-2">
-        <p className="leading-3  font-semibold text-sm">
-          {moment(fecha).format("DD")} de{" "}
-          {monthsInSpanish[moment(fecha).format("MM") - 1]}
-        </p>
-        <span className="text-5xl font-bold">
-          ${saldo.toLocaleString("es-ES")}
-        </span>
-      </div>
-
-      {/* Mostrar el modal para agregar o editar un movimiento */}
-      {modalVisible && (
-        
+        {/* Mostrar el modal para agregar o editar un movimiento */}
+        {modalVisible && (
           <MovimientoModal
             movimientoEditando={movimientoEditando}
             descripcion={descripcion}
@@ -257,99 +256,92 @@ const ExtractoBancario = () => {
             handleCancelarEdicion={handleCancelarEdicion}
             handleEliminarMovimiento={handleEliminarMovimiento} // Pasa la función de eliminar
           />
-        
-      )}
+        )}
 
-      {/* Mostrar los movimientos como tarjetas */}
-      <div className="grid grid-cols-1  bg-white p-6 pt-10 rounded-t pb-20 ">
-        <button
-          onClick={() => setModalVisible(true)}
-          className="bg-[#732a2a] text-white rounded flex justify-center font-semibold items-center w-full p-4 gap-2 shadow-lg"
-        >
-          <span className="material-symbols-outlined">playlist_add</span>
-          Agregar
-        </button>
-        {movimientos.length > 0 ? (
-          // Agrupar movimientos por mes
-          Object.entries(
-            movimientos
-              .slice()
-              .reverse()
-              .reduce((acc, mov) => {
-                const monthYear =
-                  monthsInSpanish[moment(mov.fecha).format("MM") - 1] +
-                  " " +
-                  moment(mov.fecha).format("YYYY");
-                if (!acc[monthYear]) {
-                  acc[monthYear] = [];
-                }
-                acc[monthYear].push(mov);
-                return acc;
-              }, {})
-          ).map(([monthYear, monthMovements], index) => (
-            <div key={index}>
-              {/* Mostrar el nombre del mes y año */}
+        {/* Mostrar los movimientos como tarjetas */}
+        <div className="grid grid-cols-1  bg-white p-6 pt-10 rounded-t pb-20 ">
+          <button
+            onClick={() => setModalVisible(true)}
+            className="bg-[#732a2a] text-white rounded flex justify-center font-semibold items-center w-full p-4 gap-2 shadow-lg"
+          >
+            <span className="material-symbols-outlined">playlist_add</span>
+            Agregar
+          </button>
+          {movimientos.length > 0 ? (
+            // Agrupar movimientos por mes
+            Object.entries(
+              movimientos
+                .slice()
+                .reverse()
+                .reduce((acc, mov) => {
+                  const monthYear =
+                    monthsInSpanish[moment(mov.fecha).format("MM") - 1] +
+                    " " +
+                    moment(mov.fecha).format("YYYY");
+                  if (!acc[monthYear]) {
+                    acc[monthYear] = [];
+                  }
+                  acc[monthYear].push(mov);
+                  return acc;
+                }, {})
+            ).map(([monthYear, monthMovements], index) => (
+              <div key={index}>
+                {/* Mostrar el nombre del mes y año */}
 
-              <div className="text-right text-md font-bold text-gray-600 mt-6 mb-1">
-                {monthYear}
-              </div>
+                <div className="text-right text-md font-bold text-gray-600 mt-6 mb-1">
+                  {monthYear}
+                </div>
 
-              {/* Mostrar los movimientos de este mes */}
-              {monthMovements.map((mov) => (
-                <div key={mov.id} className="">
-                  <div className="bg-white rounded shadow  mb-2 flex justify-between ">
-                    
-                    <div className="text-gray-600 flex flex-col px-4 py-2  w-full">
-                      <div className="flex w-full justify-between items-start text-gray-600 text-xs font-semibold">
-                        <p className="">
-                          {moment(mov.fecha).format("DD/MM/YY")}
-                        </p>
-                      
+                {/* Mostrar los movimientos de este mes */}
+                {monthMovements.map((mov) => (
+                  <div key={mov.id} className="">
+                    <div className="bg-white rounded shadow  mb-2 flex justify-between ">
+                      <div className="text-gray-600 flex flex-col px-4 py-2  w-full">
+                        <div className="flex w-full justify-between items-start text-gray-600 text-xs font-semibold">
+                          <p className="">
+                            {moment(mov.fecha).format("DD/MM/YY")}
+                          </p>
 
-                        <p className="">
-                          ${mov.saldo.toLocaleString("es-ES")}
-                        </p>
-                      </div>
+                          <p className="">
+                            ${mov.saldo.toLocaleString("es-ES")}
+                          </p>
+                        </div>
 
-                      <div className="flex gap-1 text-xs font-semibold flex-wrap">
-                        <p>{mov.tipoMovimiento}</p>
-                        <p>
-                          {mov.descripcion ? "(" + mov.descripcion + ")" : ""}
-                        </p>
-                      </div>
-                      
-                      <p
-                        className="text-2xl font-bold "
-                      >
-                        {
-                          ["Deposito", "Retiro", "Intereses"].includes(
+                        <div className="flex gap-1 text-xs font-semibold flex-wrap">
+                          <p>{mov.tipoMovimiento}</p>
+                          <p>
+                            {mov.descripcion ? "(" + mov.descripcion + ")" : ""}
+                          </p>
+                        </div>
+
+                        <p className="text-2xl font-bold ">
+                          {["Deposito", "Retiro", "Intereses"].includes(
                             mov.tipoMovimiento
                           )
-                            ? "$"+mov.monto.toLocaleString("es-ES")
-                            : "-$" + mov.monto.toLocaleString("es-ES")
-                        }
-                      </p>
+                            ? "$" + mov.monto.toLocaleString("es-ES")
+                            : "-$" + mov.monto.toLocaleString("es-ES")}
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => handleEditarMovimiento(mov)} // Llamada a la función de editar
+                        className="bg-[#732a2a] text-white flex justify-center items-center p-2 rounded-r"
+                      >
+                        <span className="material-symbols-outlined text-xl">
+                          edit_square
+                        </span>
+                      </button>
                     </div>
-                    <button
-                      onClick={() => handleEditarMovimiento(mov)} // Llamada a la función de editar
-                      className="bg-[#732a2a] text-white flex justify-center items-center p-2 rounded-r"
-                    >
-                      <span className="material-symbols-outlined text-xl">
-                        edit_square
-                      </span>
-                    </button>
                   </div>
-                </div>
-              ))}
-            </div>
-          ))
-        ) : (
-          <p className="text-center mt-10 text-gray-500 col-span-3">
-            No hay movimientos registrados.
-          </p>
-        )}
+                ))}
+              </div>
+            ))
+          ) : (
+            <p className="text-center mt-10 text-gray-500 col-span-3">
+              No hay movimientos registrados.
+            </p>
+          )}
+        </div>
       </div>
-    </div>
     </div>
   );
 };
