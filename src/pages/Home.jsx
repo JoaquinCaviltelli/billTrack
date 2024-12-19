@@ -95,7 +95,7 @@ const Home = () => {
           </p>
         )}
       </div>
-      <div className="bg-white p-6 py-10 rounded-xl">
+      <div className="bg-white p-6 py-10 rounded-xl mx-6">
 
   
       {/* Botón para agregar servicio */}

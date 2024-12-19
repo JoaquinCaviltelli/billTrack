@@ -261,7 +261,7 @@ const ExtractoBancario = () => {
       )}
 
       {/* Mostrar los movimientos como tarjetas */}
-      <div className="grid grid-cols-1  bg-white p-6 pt-10 rounded-xl pb-20">
+      <div className="grid grid-cols-1 mx-6 bg-white p-6 pt-10 rounded-xl pb-20">
         <button
           onClick={() => setModalVisible(true)}
           className="bg-[#732a2a] text-white rounded flex justify-center font-semibold items-center w-full p-4 gap-2 shadow-lg"
