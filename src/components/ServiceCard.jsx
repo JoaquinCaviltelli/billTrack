@@ -7,10 +7,10 @@ const ServiceCard = ({ service, currentBillAmount, percentageChange }) => {
       to={`/services/${service.id}`}
       className="border text-gray-600 p-4 rounded shadow hover:shadow-lg transition"
     >
-      <h2 className="font-medium text-sm leading-3">{service.name}</h2>
+      <p className="font-semibold text-sm ">{service.name}</p>
       <div className="flex gap-2">
 
-      <p className="font-bold text-3xl">${currentBillAmount.toLocaleString('es-ES')}</p>
+      <p className="font-bold text-3xl ">${currentBillAmount.toLocaleString('es-ES')}</p>
 
       {/* Mostrar porcentaje de cambio */}
       {currentBillAmount !== 0 && (

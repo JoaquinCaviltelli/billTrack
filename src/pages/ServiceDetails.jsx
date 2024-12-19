@@ -175,7 +175,7 @@ const ServiceDetails = () => {
   };
 
   return (
-    <div className="p-6 max-w-5xl m-auto">
+    <div className="p-6 max-w-5xl m-auto mb-20">
       <div className="flex justify-between my-10 gap-6">
         <h1 className="text-4xl text-gray-700 font-bold">{service?.name}</h1>
         <div className="flex gap-2">

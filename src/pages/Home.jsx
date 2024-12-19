@@ -3,6 +3,7 @@ import { useServices } from "../context/ServicesContext";
 import ServiceCard from "../components/ServiceCard";
 import AddServiceModal from "../components/AddServiceModal";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 // Array de los meses en español
 const monthsInSpanish = [
@@ -49,68 +50,84 @@ const Home = () => {
   const totalPercentageChange = calculatePercentageChange(currentTotalAmount, previousTotalAmount);
 
   return (
-    <div className="p-6 max-w-5xl m-auto">
-      <div className="flex w-full items-center justify-between">
+    <div className="max-w-4xl mx-auto mb-20 bg-gradient-to-tl from-[#5B50D9] to-[#302A73]">
+      {/* Encabezado */}
+      <div className="flex items-center gap-3 p-6 justify-between">
+        <p className="text-white font-semibold">Facturas de servicios</p>
+        <Link to="/extracto" className="">
+          <span className="material-symbols-outlined text-[#302A73] text-[34px] bg-white p-3 rounded-full shadow">
+          account_balance
+          </span>
+        </Link>
+      </div>
+  
+      {/* Navegación entre meses */}
+      <div className="flex w-full items-center justify-between px-6 mt-12">
         <button
-          className="bg-gray-800 text-white w-10 h-10 flex justify-center items-center rounded"
+          className="bg-white text-[#302A73]  w-7 h-7 flex justify-center items-center rounded"
           onClick={() => setCurrentMonth(currentMonth.clone().subtract(1, "month"))}
         >
-          <span className="material-symbols-outlined">
-          arrow_left
-</span>
+          <span className="material-symbols-outlined">arrow_left</span>
         </button>
-        <p className="text-lg text-gray-800 font-bold mx-4">{`${monthsInSpanish[currentMonth.month()]} ${currentMonth.year()}`}</p>
+        <p className="text-white font-semibold text-sm">{`${monthsInSpanish[currentMonth.month()]} ${currentMonth.year()}`}</p>
         <button
-          className="bg-gray-800 text-white w-10 h-10 flex justify-center items-center rounded"
+          className="bg-white text-[#302A73] w-7 h-7 flex justify-center items-center rounded"
           onClick={() => setCurrentMonth(currentMonth.clone().add(1, "month"))}
         >
-          <span className="material-symbols-outlined">
-          arrow_right
-</span>
+          <span className="material-symbols-outlined">arrow_right</span>
         </button>
       </div>
-
-      <div className="flex text-gray-700 gap-1 items-start my-10">
+  
+      {/* Total */}
+      <div className="flex text-white justify-center gap-1 items-start mb-14 px-6">
         <p className="text-5xl font-bold">${currentTotalAmount.toLocaleString("es-ES")}</p>
-
-        {/* Mostrar porcentaje de cambio en el total */}
+  
+        {/* Porcentaje de cambio en el total */}
         {previousTotalAmount !== 0 && currentTotalAmount !== 0 && (
           <p
-            className={`text-md font-semibold ${totalPercentageChange >= 0 ? "text-red-500" : "text-green-500"}`}
+            className="text-md font-semibold "
           >
             {totalPercentageChange >= 0 ? "+" : ""}
             {totalPercentageChange.toFixed(1)}%
           </p>
         )}
       </div>
+      <div className="bg-white p-6 pt-10 rounded-t-xl">
 
+  
+      {/* Botón para agregar servicio */}
       <button
-        className="bg-gray-800 w-full font-semibold text-white px-4 py-3 rounded"
+        className="bg-[#302A73] text-white rounded flex justify-center font-semibold items-center w-full p-4 gap-2 shadow-lg"
         onClick={() => setModalOpen(true)}
-      >
+        >
+          <span className="material-symbols-outlined">playlist_add</span>
         Agregar servicio
       </button>
-
-      <div className="mt-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+  
+      {/* Mostrar los servicios */}
+      <div className="mt-10 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {services.map((service) => {
           const currentAmount = getCurrentBillAmountForService(service);
           const previousAmount = getPreviousMonthBillAmountForService(service);
           const percentageChange = calculatePercentageChange(currentAmount, previousAmount);
-
+          
           return (
             <ServiceCard
-              key={service.id}
-              service={service}
-              currentBillAmount={currentAmount}
-              percentageChange={percentageChange}
+            key={service.id}
+            service={service}
+            currentBillAmount={currentAmount}
+            percentageChange={percentageChange}
             />
           );
         })}
       </div>
-
+  
+        </div >
+      {/* Modal para agregar servicio */}
       {modalOpen && <AddServiceModal onClose={() => setModalOpen(false)} />}
     </div>
   );
+  
 };
 
 export default Home;

@@ -15,6 +15,21 @@ import {
 import moment from "moment";
 import MovimientoModal from "/src/components/MovimientoModal";
 
+const monthsInSpanish = [
+  "Enero",
+  "Febrero",
+  "Marzo",
+  "Abril",
+  "Mayo",
+  "Junio",
+  "Julio",
+  "Agosto",
+  "Septiembre",
+  "Octubre",
+  "Noviembre",
+  "Diciembre",
+];
+
 const ExtractoBancario = () => {
   const [movimientos, setMovimientos] = useState([]);
   const [descripcion, setDescripcion] = useState("");
@@ -24,9 +39,6 @@ const ExtractoBancario = () => {
   const [fecha, setFecha] = useState(moment().format("YYYY-MM-DD"));
   const [movimientoEditando, setMovimientoEditando] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const [modalConfirmacionVisible, setModalConfirmacionVisible] =
-    useState(false);
-  const [movimientoAEliminar, setMovimientoAEliminar] = useState(null);
 
   const obtenerMovimientos = async () => {
     try {
@@ -90,7 +102,7 @@ const ExtractoBancario = () => {
         setMonto("");
         setFecha(moment().format("YYYY-MM-DD"));
         setModalVisible(false);
-        obtenerMovimientos()
+        obtenerMovimientos();
       } catch (error) {
         console.error("Error al agregar movimiento a Firebase: ", error);
       }
@@ -106,7 +118,6 @@ const ExtractoBancario = () => {
     setTipoMovimiento(movimiento.tipoMovimiento);
     setFecha(moment(movimiento.fecha).format("YYYY-MM-DD"));
     setModalVisible(true);
-    obtenerMovimientos()
   };
 
   const handleGuardarEdicion = async () => {
@@ -147,7 +158,7 @@ const ExtractoBancario = () => {
         setMonto("");
         setFecha(moment().format("YYYY-MM-DD"));
         setModalVisible(false);
-        obtenerMovimientos()
+        obtenerMovimientos();
       } catch (error) {
         console.error("Error al actualizar movimiento: ", error);
       }
@@ -185,7 +196,7 @@ const ExtractoBancario = () => {
 
       setSaldo(saldoAcumulado);
       setMovimientos(movimientosActualizados);
-      obtenerMovimientos()
+      obtenerMovimientos();
     } catch (error) {
       console.error("Error al eliminar movimiento: ", error);
     }
@@ -199,55 +210,36 @@ const ExtractoBancario = () => {
     setModalVisible(false);
   };
 
-  const handleAbrirModal = () => {
-    setModalVisible(true);
-  };
-
-  const handleAbrirModalConfirmacion = (id) => {
-    setMovimientoAEliminar(id);
-    setModalConfirmacionVisible(true);
-  };
-
-  const handleCerrarModalConfirmacion = () => {
-    setMovimientoAEliminar(null);
-    setModalConfirmacionVisible(false);
-  };
-
-  const handleConfirmarEliminacion = () => {
-    if (movimientoAEliminar) {
-      handleEliminarMovimiento(movimientoAEliminar);
-      setModalConfirmacionVisible(false);
-    }
-  };
-
   useEffect(() => {
     obtenerMovimientos();
   }, []);
 
   return (
-    <div className="max-w-4xl mx-auto p-6 mb-20">
+    <div className="max-w-4xl mx-auto mb-20 bg-gradient-to-tl from-[#5B50D9] to-[#302A73]">
       {/* Mostrar saldo final */}
-      <div className="my-10 flex  justify-between items-end gap-3">
-        <div>
-          <p className="leading-3 text-gray-600 font-bold text-sm">
-            Detalle bancario
-          </p>
-          <span className="text-green-800 text-4xl font-bold">
-            ${saldo.toLocaleString("es-ES")}
-          </span>
-        </div>
+      <div className="flex items-center gap-3 p-6 justify-between">
+<p className="text-white font-semibold">Detalle bancario</p>
+      <Link to="/" className="">
+    
+        <span className="material-symbols-outlined text-[#302A73] text-[34px] bg-white p-3 rounded-full shadow">
+          docs
+        </span>
 
-        <button
-          onClick={handleAbrirModal}
-          className="bg-green-800 text-white rounded flex justify-center items-center w-10 h-10"
-        >
-          <span className="material-symbols-outlined">playlist_add</span>
-        </button>
+      </Link>
+      </div>
+      <div className=" pt-14 pb-14 flex flex-col justify-center items-center text-white gap-2">
+        <p className="leading-3  font-semibold text-sm">
+          {moment(fecha).format("DD")} de{" "}
+          {monthsInSpanish[moment(fecha).format("MM") - 1]}
+        </p>
+        <span className="text-5xl font-bold">
+          ${saldo.toLocaleString("es-ES")}
+        </span>
       </div>
 
       {/* Mostrar el modal para agregar o editar un movimiento */}
       {modalVisible && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+        
           <MovimientoModal
             movimientoEditando={movimientoEditando}
             descripcion={descripcion}
@@ -261,95 +253,100 @@ const ExtractoBancario = () => {
             handleAddMovimiento={handleAddMovimiento}
             handleGuardarEdicion={handleGuardarEdicion}
             handleCancelarEdicion={handleCancelarEdicion}
+            handleEliminarMovimiento={handleEliminarMovimiento} // Pasa la función de eliminar
           />
-        </div>
+        
       )}
 
       {/* Mostrar los movimientos como tarjetas */}
-      <div className="grid grid-cols-1  gap-2">
+      <div className="grid grid-cols-1 bg-white p-6 pt-10 rounded-t-xl">
+        <button
+          onClick={() => setModalVisible(true)}
+          className="bg-[#302A73] text-white rounded flex justify-center font-semibold items-center w-full p-4 gap-2 shadow-lg"
+        >
+          <span className="material-symbols-outlined">playlist_add</span>
+          Agregar
+        </button>
         {movimientos.length > 0 ? (
-          movimientos
-            .slice()
-            .reverse()
-            .map((mov) => (
-              <div
-                key={mov.id}
-                className="bg-white p-4 rounded shadow border"
-              >
-                <div className="flex justify-between items-start">
-                  <p className="text-xs leading-3 font-medium text-gray-700">
-                    {moment(mov.fecha).format("DD/MM/YY")}
-                  </p>
-                  <p className="text-xl leading-3 font-medium text-gray-700">
-                    ${mov.saldo.toLocaleString("es-ES")}
-                  </p>
-                </div>
-                <div className="text-gray-700 flex justify-between items-end ">
-                  <div>
-                    <p
-                      className={`text-xl font-medium ${
-                        ["Deposito", "Retiro", "Intereses"].includes(
-                          mov.tipoMovimiento
-                        )
-                          ? "text-green-700"
-                          : "text-red-700"
-                      }`}
-                    >
-                      ${mov.monto.toLocaleString("es-ES")}
-                    </p>
-                    <p className="text-xs font-medium leading-3">{mov.tipoMovimiento}</p>
-                    <p className="text-xs font-medium leading-3">{mov.descripcion || "-"}</p>
-                  </div>
-                  <div className="flex gap-1">
+          // Agrupar movimientos por mes
+          Object.entries(
+            movimientos
+              .slice()
+              .reverse()
+              .reduce((acc, mov) => {
+                const monthYear =
+                  monthsInSpanish[moment(mov.fecha).format("MM") - 1] +
+                  " " +
+                  moment(mov.fecha).format("YYYY");
+                if (!acc[monthYear]) {
+                  acc[monthYear] = [];
+                }
+                acc[monthYear].push(mov);
+                return acc;
+              }, {})
+          ).map(([monthYear, monthMovements], index) => (
+            <div key={index}>
+              {/* Mostrar el nombre del mes y año */}
+
+              <div className="text-right text-md font-bold text-gray-600 mt-6 mb-1">
+                {monthYear}
+              </div>
+
+              {/* Mostrar los movimientos de este mes */}
+              {monthMovements.map((mov) => (
+                <div key={mov.id} className="">
+                  <div className="bg-white rounded shadow  mb-2 flex justify-between">
+                    
+                    <div className="text-gray-600 flex flex-col px-4 py-2  w-full">
+                      <div className="flex w-full justify-between items-start text-gray-600 text-xs font-semibold">
+                        <p className="">
+                          {moment(mov.fecha).format("DD/MM/YY")}
+                        </p>
+                      
+
+                        <p className="">
+                          ${mov.saldo.toLocaleString("es-ES")}
+                        </p>
+                      </div>
+
+                      <div className="flex gap-1 text-xs font-semibold flex-wrap">
+                        <p>{mov.tipoMovimiento}</p>
+                        <p>
+                          {mov.descripcion ? "(" + mov.descripcion + ")" : ""}
+                        </p>
+                      </div>
+                      
+                      <p
+                        className="text-2xl font-bold "
+                      >
+                        {
+                          ["Deposito", "Retiro", "Intereses"].includes(
+                            mov.tipoMovimiento
+                          )
+                            ? "$"+mov.monto.toLocaleString("es-ES")
+                            : "-$" + mov.monto.toLocaleString("es-ES")
+                        }
+                      </p>
+                    </div>
                     <button
-                      onClick={() => handleEditarMovimiento(mov)}
-                      className="bg-gray-800 text-white  w-8 h-8 flex justify-center items-center rounded"
+                      onClick={() => handleEditarMovimiento(mov)} // Llamada a la función de editar
+                      className="bg-gray-600 text-white flex justify-center items-center p-2 rounded-r"
                     >
-                      <span className="material-symbols-outlined ">
+                      <span className="material-symbols-outlined text-xl">
                         edit_square
                       </span>
                     </button>
-                    <button
-                      onClick={() => handleAbrirModalConfirmacion(mov.id)}
-                      className="bg-gray-600 text-white w-8 h-8 flex justify-center items-center rounded"
-                    >
-                      <span className="material-symbols-outlined">delete</span>
-                    </button>
                   </div>
                 </div>
-              </div>
-            ))
+              ))}
+            </div>
+          ))
         ) : (
-          <p className="text-center text-gray-500 col-span-3">
+          <p className="text-center mt-10 text-gray-500 col-span-3">
             No hay movimientos registrados.
           </p>
         )}
       </div>
-
-      {/* Modal de Confirmación */}
-      {modalConfirmacionVisible && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h3 className="text-lg font-semibold mb-4">
-              ¿Estás seguro de eliminar este movimiento?
-            </h3>
-            <div className="flex justify-between">
-              <button
-                onClick={handleCerrarModalConfirmacion}
-                className="bg-gray-500 text-white p-2 rounded-md hover:bg-gray-600"
-              >
-                Cancelar
-              </button>
-              <button
-                onClick={handleConfirmarEliminacion}
-                className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600"
-              >
-                Eliminar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
