@@ -185,41 +185,40 @@ const ServiceDetails = () => {
           >
             <span className="material-symbols-outlined">edit_square</span>
           </button>
-          
         </div>
       </div>
-
-      <div className="mt-6 w-full">
+      <div className="mt-6 w-full max-w-lg m-auto">
         <Bar data={chartData} options={chartOptions} />
-      </div>
-      <div className="flex justify-between gap-3 mt-1 text-xs">
-        {/* Botones para seleccionar el rango de meses */}
-        <div className="flex gap-1 justify-center ">
+
+        <div className="flex justify-between gap-3 mt-1 text-xs">
+          {/* Botones para seleccionar el rango de meses */}
+          <div className="flex gap-1 justify-center ">
+            <button
+              onClick={() => setMonthsToShow(6)}
+              className="bg-gray-500 text-white w-10 flex justify-center items-center px-4 py-2 rounded"
+            >
+              6
+            </button>
+            <button
+              onClick={() => setMonthsToShow(12)}
+              className="bg-gray-500 text-white w-10 flex justify-center items-center px-4 py-2 rounded"
+            >
+              12
+            </button>
+            <button
+              onClick={() => setMonthsToShow(24)}
+              className="bg-gray-500 text-white w-10 flex justify-center items-center px-4 py-2 rounded"
+            >
+              24
+            </button>
+          </div>
           <button
-            onClick={() => setMonthsToShow(6)}
-            className="bg-gray-500 text-white w-10 flex justify-center items-center px-4 py-2 rounded"
+            onClick={() => setShowConsumption(!showConsumption)} // Cambiar entre importe y consumo
+            className="bg-gray-500 text-white px-4 py-2 rounded"
           >
-            6
-          </button>
-          <button
-            onClick={() => setMonthsToShow(12)}
-            className="bg-gray-500 text-white w-10 flex justify-center items-center px-4 py-2 rounded"
-          >
-            12
-          </button>
-          <button
-            onClick={() => setMonthsToShow(24)}
-            className="bg-gray-500 text-white w-10 flex justify-center items-center px-4 py-2 rounded"
-          >
-            24
+            {showConsumption ? "Ver Importe" : "Ver Consumo"}
           </button>
         </div>
-        <button
-          onClick={() => setShowConsumption(!showConsumption)} // Cambiar entre importe y consumo
-          className="bg-gray-500 text-white px-4 py-2 rounded"
-        >
-          {showConsumption ? "Ver Importe" : "Ver Consumo"}
-        </button>
       </div>
 
       <div className="mt-14">

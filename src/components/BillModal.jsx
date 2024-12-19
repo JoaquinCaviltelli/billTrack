@@ -60,6 +60,8 @@ const BillModal = ({ isOpen, onClose, onSave, billData }) => {
     }
   };
 
+  
+
   if (!isOpen) return null;
 
   return (

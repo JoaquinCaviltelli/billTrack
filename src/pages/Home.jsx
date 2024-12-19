@@ -50,7 +50,10 @@ const Home = () => {
   const totalPercentageChange = calculatePercentageChange(currentTotalAmount, previousTotalAmount);
 
   return (
-    <div className="max-w-4xl mx-auto mb-20 bg-gradient-to-tl from-[#5B50D9] to-[#302A73]">
+    <div className="w-full inset-0 fixed overflow-y-scroll  bg-gradient-to-tl from-[#5B50D9] to-[#302A73]">
+      <div className="max-w-4xl mx-auto ">
+
+      
       {/* Encabezado */}
       <div className="flex items-center gap-3 p-6 justify-between">
         <p className="text-white font-semibold">Facturas de servicios</p>
@@ -92,7 +95,7 @@ const Home = () => {
           </p>
         )}
       </div>
-      <div className="bg-white p-6 pt-10 rounded-t-xl">
+      <div className="bg-white p-6 py-10 rounded-xl">
 
   
       {/* Botón para agregar servicio */}
@@ -125,6 +128,7 @@ const Home = () => {
         </div >
       {/* Modal para agregar servicio */}
       {modalOpen && <AddServiceModal onClose={() => setModalOpen(false)} />}
+    </div>
     </div>
   );
   

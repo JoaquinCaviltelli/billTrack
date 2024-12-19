@@ -215,13 +215,15 @@ const ExtractoBancario = () => {
   }, []);
 
   return (
-    <div className="max-w-4xl mx-auto mb-20 bg-gradient-to-tl from-[#5B50D9] to-[#302A73]">
+    <div className="w-full inset-0 fixed overflow-y-scroll  bg-gradient-to-tl from-[#d95050] to-[#732a2a]">
+
+      <div className="max-w-4xl m-auto ">
       {/* Mostrar saldo final */}
       <div className="flex items-center gap-3 p-6 justify-between">
 <p className="text-white font-semibold">Detalle bancario</p>
       <Link to="/" className="">
     
-        <span className="material-symbols-outlined text-[#302A73] text-[34px] bg-white p-3 rounded-full shadow">
+        <span className="material-symbols-outlined text-[#732a2a] text-[34px] bg-white p-3 rounded-full shadow">
           docs
         </span>
 
@@ -259,10 +261,10 @@ const ExtractoBancario = () => {
       )}
 
       {/* Mostrar los movimientos como tarjetas */}
-      <div className="grid grid-cols-1 bg-white p-6 pt-10 rounded-t-xl">
+      <div className="grid grid-cols-1  bg-white p-6 pt-10 rounded-xl pb-20">
         <button
           onClick={() => setModalVisible(true)}
-          className="bg-[#302A73] text-white rounded flex justify-center font-semibold items-center w-full p-4 gap-2 shadow-lg"
+          className="bg-[#732a2a] text-white rounded flex justify-center font-semibold items-center w-full p-4 gap-2 shadow-lg"
         >
           <span className="material-symbols-outlined">playlist_add</span>
           Agregar
@@ -295,7 +297,7 @@ const ExtractoBancario = () => {
               {/* Mostrar los movimientos de este mes */}
               {monthMovements.map((mov) => (
                 <div key={mov.id} className="">
-                  <div className="bg-white rounded shadow  mb-2 flex justify-between">
+                  <div className="bg-white rounded shadow  mb-2 flex justify-between ">
                     
                     <div className="text-gray-600 flex flex-col px-4 py-2  w-full">
                       <div className="flex w-full justify-between items-start text-gray-600 text-xs font-semibold">
@@ -330,7 +332,7 @@ const ExtractoBancario = () => {
                     </div>
                     <button
                       onClick={() => handleEditarMovimiento(mov)} // Llamada a la función de editar
-                      className="bg-gray-600 text-white flex justify-center items-center p-2 rounded-r"
+                      className="bg-[#732a2a] text-white flex justify-center items-center p-2 rounded-r"
                     >
                       <span className="material-symbols-outlined text-xl">
                         edit_square
@@ -347,6 +349,7 @@ const ExtractoBancario = () => {
           </p>
         )}
       </div>
+    </div>
     </div>
   );
 };
