@@ -124,8 +124,8 @@ const ServiceDetails = () => {
           ? "Consumo del servicio"
           : "Importe del servicio",
         data: data,
-        backgroundColor: "rgba(55, 65, 81)",
-        borderColor: "rgba(55, 65, 81)",
+        backgroundColor: "#302A73",
+        borderColor: "#302A73",
         borderWidth: 1,
       },
     ],
@@ -177,20 +177,15 @@ const ServiceDetails = () => {
   return (
     <div className="p-6 max-w-5xl m-auto mb-20">
       <div className="flex justify-between my-10 gap-6">
-        <h1 className="text-4xl text-gray-700 font-bold">{service?.name}</h1>
+        <h1 className="text-5xl text-[#302A73] font-bold">{service?.name}</h1>
         <div className="flex gap-2">
           <button
             onClick={() => setIsEditNameModalOpen(true)} // Abre el modal de edición del nombre
-            className="bg-gray-800 text-white w-10 h-10 flex justify-center items-center rounded"
+            className="bg-[#302A73] text-white w-10 h-10 flex justify-center items-center rounded"
           >
             <span className="material-symbols-outlined">edit_square</span>
           </button>
-          <button
-            onClick={handleDeleteService}
-            className="bg-gray-600 text-white w-10 h-10 flex justify-center items-center rounded"
-          >
-            <span className="material-symbols-outlined">delete</span>
-          </button>
+          
         </div>
       </div>
 
@@ -230,7 +225,7 @@ const ServiceDetails = () => {
       <div className="mt-14">
         <button
           onClick={() => setIsModalOpen(true)}
-          className="bg-gray-800 mb-6 w-full font-semibold text-white px-4 py-3 rounded"
+          className="bg-[#302A73] mb-6 w-full font-semibold text-white px-4 py-3 rounded"
         >
           Agregar Factura
         </button>
@@ -289,6 +284,7 @@ const ServiceDetails = () => {
           onClose={() => setIsEditNameModalOpen(false)}
           onSave={handleUpdateServiceName}
           setServiceName={setServiceName}
+          handleDeleteService={handleDeleteService}
         />
       )}
     </div>
