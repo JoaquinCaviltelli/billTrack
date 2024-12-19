@@ -79,23 +79,24 @@ const Home = () => {
   return (
     <div className="w-full inset-0 fixed overflow-y-scroll   ">
       <div className="max-w-4xl mx-auto ">
-        <div className="pb-14 bg-gradient-to-tl from-[#5B50D9] to-[#302A73]">
+        <div className="pb-24 bg-gradient-to-tl from-[#5B50D9] to-[#302A73]">
 
        
         {/* Encabezado */}
         <div className="flex items-center gap-3 p-6 justify-between">
           <p className="text-white font-semibold">Facturas de servicios</p>
           <Link to="/extracto" className="">
-            <span className="material-symbols-outlined text-[#302A73] text-[34px] bg-white p-3 rounded-full shadow">
+            <span className="material-symbols-outlined text-[#463DA6] text-[34px] bg-white p-3 rounded-full shadow">
               account_balance
             </span>
+            
           </Link>
         </div>
 
         {/* Navegación entre meses */}
         <div className="flex w-full items-center justify-between px-6 mt-12 ">
           <button
-            className="bg-white text-[#302A73]  w-7 h-7 flex justify-center items-center rounded"
+            className="bg-white text-[#463DA6]  w-7 h-7 flex justify-center items-center rounded"
             onClick={() =>
               setCurrentMonth(currentMonth.clone().subtract(1, "month"))
             }
@@ -106,7 +107,7 @@ const Home = () => {
             monthsInSpanish[currentMonth.month()]
           } ${currentMonth.year()}`}</p>
           <button
-            className="bg-white text-[#302A73] w-7 h-7 flex justify-center items-center rounded"
+            className="bg-white text-[#463DA6] w-7 h-7 flex justify-center items-center rounded"
             onClick={() =>
               setCurrentMonth(currentMonth.clone().add(1, "month"))
             }
@@ -131,10 +132,10 @@ const Home = () => {
 
         </div>
         </div>
-        <div className="bg-white p-6 py-10 rounded-t ">
+        <div className="bg-white p-6 py-10 rounded-t-2xl relative -top-10">
           {/* Botón para agregar servicio */}
           <button
-            className="bg-[#302A73] text-white rounded flex justify-center font-semibold items-center w-full p-4 gap-2 shadow-lg"
+            className="bg-[#463DA6] text-white rounded flex justify-center font-semibold items-center w-full p-4 gap-2 shadow-lg"
             onClick={() => setModalOpen(true)}
           >
             <span className="material-symbols-outlined">playlist_add</span>

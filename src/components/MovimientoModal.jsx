@@ -61,13 +61,13 @@ const MovimientoModal = ({
       <div className="flex flex-col justify-end gap-4 mt-20">
         <button
           onClick={movimientoEditando ? handleGuardarEdicion : handleAddMovimiento}
-          className="bg-[#302A73] text-white rounded flex justify-center font-semibold items-center w-full p-4 gap-2 shadow-lg"
+          className="bg-[#A63D3D] text-white rounded flex justify-center font-semibold items-center w-full p-4 gap-2 shadow-lg"
           >
           {movimientoEditando ? "Guardar Edición" : "Agregar Movimiento"}
         </button>
         <button
           onClick={handleCancelarEdicion}
-          className="bg-white border border-[#302A73] p-2  rounded text-[#302A73] font-semibold"
+          className="bg-white border border-[#A63D3D] p-2  rounded text-[#A63D3D] font-semibold"
           >
           Cancelar
         </button>
@@ -76,7 +76,7 @@ const MovimientoModal = ({
         {movimientoEditando && (
           <button
             onClick={() => handleEliminarMovimiento(movimientoEditando.id)}
-            className="bg-red-500 text-white px-4 py-3 font-semibold rounded mt-14"
+            className="bg-red-700 text-white px-4 py-3 font-semibold rounded mt-14"
             >
             Eliminar Movimiento
           </button>

@@ -223,12 +223,12 @@ const ExtractoBancario = () => {
         <div className="flex items-center gap-3 p-6 justify-between">
           <p className="text-white font-semibold">Detalle bancario</p>
           <Link to="/" className="">
-            <span className="material-symbols-outlined text-[#732a2a] text-[34px] bg-white p-3 rounded-full shadow">
+            <span className="material-symbols-outlined text-[#A63D3D] text-[34px] bg-white p-3 rounded-full shadow">
               docs
             </span>
           </Link>
         </div>
-        <div className=" pt-14 pb-14 flex flex-col justify-center items-center text-white gap-2">
+        <div className=" pt-14 pb-24 flex flex-col justify-center items-center text-white gap-2">
           <p className="leading-3  font-semibold text-sm">
             {moment(fecha).format("DD")} de{" "}
             {monthsInSpanish[moment(fecha).format("MM") - 1]}
@@ -239,30 +239,13 @@ const ExtractoBancario = () => {
         </div>
         </div>
 
-        {/* Mostrar el modal para agregar o editar un movimiento */}
-        {modalVisible && (
-          <MovimientoModal
-            movimientoEditando={movimientoEditando}
-            descripcion={descripcion}
-            monto={monto}
-            tipoMovimiento={tipoMovimiento}
-            fecha={fecha}
-            setDescripcion={setDescripcion}
-            setMonto={setMonto}
-            setTipoMovimiento={setTipoMovimiento}
-            setFecha={setFecha}
-            handleAddMovimiento={handleAddMovimiento}
-            handleGuardarEdicion={handleGuardarEdicion}
-            handleCancelarEdicion={handleCancelarEdicion}
-            handleEliminarMovimiento={handleEliminarMovimiento} // Pasa la función de eliminar
-          />
-        )}
+       
 
         {/* Mostrar los movimientos como tarjetas */}
-        <div className="grid grid-cols-1  bg-white p-6 pt-10 rounded-t pb-20 ">
+        <div className="grid grid-cols-1  bg-white p-6 pt-10 rounded-t-2xl pb-20 relative -top-10">
           <button
             onClick={() => setModalVisible(true)}
-            className="bg-[#732a2a] text-white rounded flex justify-center font-semibold items-center w-full p-4 gap-2 shadow-lg"
+            className="bg-[#A63D3D] text-white rounded flex justify-center font-semibold items-center w-full p-4 gap-2 shadow-lg"
           >
             <span className="material-symbols-outlined">playlist_add</span>
             Agregar
@@ -307,7 +290,7 @@ const ExtractoBancario = () => {
                           </p>
                         </div>
 
-                        <div className="flex gap-1 text-xs font-semibold flex-wrap">
+                        <div className="flex gap-1 text-xs font-semibold flex-wrap text-[#A63D3D]">
                           <p>{mov.tipoMovimiento}</p>
                           <p>
                             {mov.descripcion ? "(" + mov.descripcion + ")" : ""}
@@ -324,7 +307,7 @@ const ExtractoBancario = () => {
                       </div>
                       <button
                         onClick={() => handleEditarMovimiento(mov)} // Llamada a la función de editar
-                        className="bg-[#732a2a] text-white flex justify-center items-center p-2 rounded-r"
+                        className="bg-[#A63D3D] text-white flex justify-center items-center p-1 rounded-r"
                       >
                         <span className="material-symbols-outlined text-xl">
                           edit_square
@@ -342,6 +325,24 @@ const ExtractoBancario = () => {
           )}
         </div>
       </div>
+       {/* Mostrar el modal para agregar o editar un movimiento */}
+       {modalVisible && (
+          <MovimientoModal
+            movimientoEditando={movimientoEditando}
+            descripcion={descripcion}
+            monto={monto}
+            tipoMovimiento={tipoMovimiento}
+            fecha={fecha}
+            setDescripcion={setDescripcion}
+            setMonto={setMonto}
+            setTipoMovimiento={setTipoMovimiento}
+            setFecha={setFecha}
+            handleAddMovimiento={handleAddMovimiento}
+            handleGuardarEdicion={handleGuardarEdicion}
+            handleCancelarEdicion={handleCancelarEdicion}
+            handleEliminarMovimiento={handleEliminarMovimiento} // Pasa la función de eliminar
+          />
+        )}
     </div>
   );
 };

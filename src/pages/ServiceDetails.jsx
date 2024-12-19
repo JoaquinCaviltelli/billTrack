@@ -76,6 +76,10 @@ const ServiceDetails = () => {
       navigate("/");
     }
   };
+  const handleAddBill = () => {
+    setEditingBillData(false);  // Restablecer los datos cuando se agrega una nueva factura
+    setIsModalOpen(true);  // Abrir el modal
+  };
 
   const handleAddOrEditBill = async (bill) => {
     if (editingBillData) {
@@ -95,6 +99,7 @@ const ServiceDetails = () => {
   const handleDeleteBill = async (billIndex) => {
     if (window.confirm("¿Estás seguro de que deseas eliminar esta factura?")) {
       await deleteBill(id, billIndex);
+      setIsModalOpen(false);
     }
   };
 
@@ -124,8 +129,8 @@ const ServiceDetails = () => {
           ? "Consumo del servicio"
           : "Importe del servicio",
         data: data,
-        backgroundColor: "#302A73",
-        borderColor: "#302A73",
+        backgroundColor: "#463DA6",
+        borderColor: "#463DA6",
         borderWidth: 1,
       },
     ],
@@ -177,11 +182,11 @@ const ServiceDetails = () => {
   return (
     <div className="p-6 max-w-5xl m-auto mb-20">
       <div className="flex justify-between my-10 gap-6">
-        <h1 className="text-5xl text-[#302A73] font-bold">{service?.name}</h1>
+        <h1 className="text-5xl text-[#463DA6] font-bold">{service?.name}</h1>
         <div className="flex gap-2">
           <button
             onClick={() => setIsEditNameModalOpen(true)} // Abre el modal de edición del nombre
-            className="bg-[#302A73] text-white w-10 h-10 flex justify-center items-center rounded"
+            className="bg-[#463DA6] text-white w-10 h-10 flex justify-center items-center rounded"
           >
             <span className="material-symbols-outlined">edit_square</span>
           </button>
@@ -223,8 +228,8 @@ const ServiceDetails = () => {
 
       <div className="mt-14">
         <button
-          onClick={() => setIsModalOpen(true)}
-          className="bg-[#302A73] mb-6 w-full font-semibold text-white px-4 py-3 rounded"
+          onClick={handleAddBill}
+          className="bg-[#463DA6] mb-6 w-full font-semibold text-white px-4 py-3 rounded"
         >
           Agregar Factura
         </button>
@@ -232,9 +237,9 @@ const ServiceDetails = () => {
           {sortedBills.map((bill, index) => (
             <li
               key={index}
-              className="border text-gray-600 p-4 rounded shadow hover:shadow-lg transition"
+              className="border text-gray-600 rounded shadow hover:shadow-lg transition flex justify-between"
             >
-              <div className="flex items-center justify-between">
+              <div className="flex items-center p-4 justify-between">
                 <div className="flex flex-col">
                   <p className="font-medium text-sm">
                     {monthsInSpanish[bill.month - 1]} {bill.year}
@@ -247,23 +252,18 @@ const ServiceDetails = () => {
                   </p>
                 </div>
 
-                <div className="flex gap-2">
+                
+                 
+                
+              </div>
                   <button
                     onClick={() => handleEditBill(bill, index)}
-                    className="bg-gray-800 text-white w-10 h-10 flex justify-center items-center rounded"
+                    className="bg-[#463DA6] text-white p-1 flex justify-center items-center rounded-r"
                   >
                     <span className="material-symbols-outlined">
                       edit_square
                     </span>
                   </button>
-                  <button
-                    onClick={() => handleDeleteBill(index)}
-                    className="bg-gray-600 text-white w-10 h-10 flex justify-center items-center rounded"
-                  >
-                    <span className="material-symbols-outlined">delete</span>
-                  </button>
-                </div>
-              </div>
             </li>
           ))}
         </ul>
@@ -274,6 +274,7 @@ const ServiceDetails = () => {
         onClose={() => setIsModalOpen(false)}
         onSave={handleAddOrEditBill}
         billData={editingBillData}
+        onDelete={handleDeleteBill}
       />
 
       {isEditNameModalOpen && (
@@ -284,6 +285,7 @@ const ServiceDetails = () => {
           onSave={handleUpdateServiceName}
           setServiceName={setServiceName}
           handleDeleteService={handleDeleteService}
+          
         />
       )}
     </div>

@@ -16,7 +16,7 @@ const monthsInSpanish = [
   "Diciembre",
 ];
 
-const BillModal = ({ isOpen, onClose, onSave, billData }) => {
+const BillModal = ({ isOpen, onClose, onSave, billData, onDelete }) => {
   const [amount, setAmount] = useState("");
   const [consumption, setConsumption] = useState("");
   const [month, setMonth] = useState(
@@ -30,37 +30,36 @@ const BillModal = ({ isOpen, onClose, onSave, billData }) => {
       setConsumption(billData.consumption);
       setMonth(billData.month);
       setYear(billData.year);
+    } else {
+      setAmount("");  // Restablecer al agregar factura
+      setConsumption("");  // Restablecer al agregar factura
+      setMonth((new Date().getMonth() + 1).toString().padStart(2, "0"));
+      setYear(new Date().getFullYear());
     }
   }, [billData]);
+  
 
   const handleSave = () => {
     if (!amount) {
       alert("El importe es obligatorio");
       return;
     }
-    if (!consumption) {
-      const bill = {
-        amount: parseFloat(amount),
-        consumption: 0,
-        month,
-        year,
-        date: new Date().toISOString(),
-      };
-      onSave(bill);
-    } else {
-      const bill = {
-        amount: parseFloat(amount),
-        consumption: parseFloat(consumption),
-        month,
-        year,
-        date: new Date().toISOString(),
-      };
-
-      onSave(bill);
-    }
+    const bill = {
+      amount: parseFloat(amount),
+      consumption: consumption ? parseFloat(consumption) : 0,
+      month,
+      year,
+      date: new Date().toISOString(),
+    };
+    onSave(bill);
+    
   };
-
   
+
+  const handleDelete = () => {
+      onDelete(billData.index); // Llamar a la función de eliminación
+    
+  };
 
   if (!isOpen) return null;
 
@@ -115,16 +114,27 @@ const BillModal = ({ isOpen, onClose, onSave, billData }) => {
           className="border-b-2 pt-6 pl-2 pb-2 text-lg w-full outline-none text-gray-700 font-semibold"
         />
 
-        <div className="flex flex-col justify-end gap-2 mt-20">
+        <div className="flex flex-col justify-end gap-4 mt-20">
           <button
             onClick={handleSave}
-            className="bg-gray-800 text-white px-4 py-2 rounded"
+            className="bg-[#463DA6] text-white p-4  rounded"
           >
             {billData ? "Guardar Cambios" : "Agregar Factura"}
           </button>
-          <button onClick={onClose} className="bg-gray-300 px-4 py-2 rounded">
+
+
+          <button onClick={onClose} className="bg-white text-[#463DA6] border-[#463DA6] border p-3 rounded">
             Cancelar
           </button>
+          {/* Si estamos editando una factura, mostrar el botón de eliminar */}
+          {billData && (
+            <button
+              onClick={handleDelete}
+              className="bg-red-700 text-white p-3 rounded mt-10"
+            >
+              Eliminar Factura
+            </button>
+          )}
         </div>
       </div>
     </div>
