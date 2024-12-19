@@ -261,10 +261,10 @@ const ExtractoBancario = () => {
       )}
 
       {/* Mostrar los movimientos como tarjetas */}
-      <div className="grid grid-cols-1 mx-6 bg-white p-6 pt-10 rounded-xl pb-20">
+      <div className="grid grid-cols-1 mx-4 bg-white p-4 pt-10 rounded-xl pb-20">
         <button
           onClick={() => setModalVisible(true)}
-          className="bg-[#732a2a] text-white rounded flex justify-center font-semibold items-center w-full p-4 gap-2 shadow-lg"
+          className="bg-[#732a2a] text-white rounded flex justify-center font-semibold items-center w-full p-3 gap-2 shadow-lg"
         >
           <span className="material-symbols-outlined">playlist_add</span>
           Agregar
@@ -299,8 +299,8 @@ const ExtractoBancario = () => {
                 <div key={mov.id} className="">
                   <div className="bg-white rounded shadow  mb-2 flex justify-between ">
                     
-                    <div className="text-gray-600 flex flex-col px-4 py-2  w-full">
-                      <div className="flex w-full justify-between items-start text-gray-600 text-xs font-semibold">
+                    <div className="text-gray-600 flex flex-col px-2 py-2  w-full">
+                      <div className="flex w-full justify-between items-start text-gray-600 text-[11px] font-semibold">
                         <p className="">
                           {moment(mov.fecha).format("DD/MM/YY")}
                         </p>
@@ -311,7 +311,7 @@ const ExtractoBancario = () => {
                         </p>
                       </div>
 
-                      <div className="flex gap-1 text-xs font-semibold flex-wrap">
+                      <div className="flex gap-1 text-[11px] font-bold flex-wrap">
                         <p>{mov.tipoMovimiento}</p>
                         <p>
                           {mov.descripcion ? "(" + mov.descripcion + ")" : ""}
@@ -319,7 +319,7 @@ const ExtractoBancario = () => {
                       </div>
                       
                       <p
-                        className="text-2xl font-bold "
+                        className="text-xl font-bold "
                       >
                         {
                           ["Deposito", "Retiro", "Intereses"].includes(
@@ -332,7 +332,7 @@ const ExtractoBancario = () => {
                     </div>
                     <button
                       onClick={() => handleEditarMovimiento(mov)} // Llamada a la función de editar
-                      className="bg-[#732a2a] text-white flex justify-center items-center p-2 rounded-r"
+                      className="bg-[#732a2a] text-white flex justify-center items-center p-1 rounded-r"
                     >
                       <span className="material-symbols-outlined text-xl">
                         edit_square
