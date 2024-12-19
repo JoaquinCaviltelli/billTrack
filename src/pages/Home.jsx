@@ -77,8 +77,8 @@ const Home = () => {
   );
 
   return (
-    <div className="w-full inset-0 fixed overflow-y-scroll  bg-gradient-to-tl from-[#5B50D9] to-[#302A73] h-max">
-      <div className="max-w-4xl mx-auto h-max">
+    <div className="w-full inset-0 fixed overflow-y-scroll   ">
+      <div className="max-w-4xl mx-auto bg-gradient-to-tl from-[#5B50D9] to-[#302A73]">
         {/* Encabezado */}
         <div className="flex items-center gap-3 p-6 justify-between">
           <p className="text-white font-semibold">Facturas de servicios</p>
@@ -126,7 +126,7 @@ const Home = () => {
             </p>
           )}
         </div>
-        <div className="bg-white p-6 py-10 rounded-t h-full">
+        <div className="bg-white p-6 py-10 rounded-t ">
           {/* Botón para agregar servicio */}
           <button
             className="bg-[#302A73] text-white rounded flex justify-center font-semibold items-center w-full p-4 gap-2 shadow-lg"

@@ -215,9 +215,9 @@ const ExtractoBancario = () => {
   }, []);
 
   return (
-    <div className="w-full inset-0 fixed overflow-y-scroll  bg-gradient-to-tl from-[#d95050] to-[#732a2a]">
+    <div className="w-full inset-0 fixed overflow-y-scroll  ">
 
-      <div className="max-w-4xl m-auto ">
+      <div className="max-w-4xl m-auto bg-gradient-to-tl from-[#d95050] to-[#732a2a]">
       {/* Mostrar saldo final */}
       <div className="flex items-center gap-3 p-6 justify-between">
 <p className="text-white font-semibold">Detalle bancario</p>
@@ -261,7 +261,7 @@ const ExtractoBancario = () => {
       )}
 
       {/* Mostrar los movimientos como tarjetas */}
-      <div className="grid grid-cols-1  bg-white p-6 pt-10 rounded-t pb-20">
+      <div className="grid grid-cols-1  bg-white p-6 pt-10 rounded-t pb-20 ">
         <button
           onClick={() => setModalVisible(true)}
           className="bg-[#732a2a] text-white rounded flex justify-center font-semibold items-center w-full p-4 gap-2 shadow-lg"
