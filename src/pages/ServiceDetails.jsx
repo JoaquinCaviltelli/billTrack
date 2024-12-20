@@ -130,6 +130,7 @@ const ServiceDetails = () => {
         data: data,
         backgroundColor: "#302A73",
         borderWidth: 0,
+        borderRadius: 5,
       },
     ],
   };
@@ -192,24 +193,17 @@ const ServiceDetails = () => {
 
   return (
     <div className="p-6 max-w-5xl m-auto mb-20">
-      <div className="flex justify-between mt-8  gap-6">
+      <div className="flex mt-8  gap-6">
         <div>
 
-        <h1 className="text-5xl text-[#302A73] font-bold">{service?.name}</h1>
-        <p className="text-[#463DA6] font-semibold text-right">
+        <h1 onClick={() => setIsEditNameModalOpen(true)} className="text-5xl text-[#463DA6] font-bold">{service?.name}</h1>
+        <p className="text-[#302A73] font-semibold text-right ">
         {showConsumption ? "Consumo" : "Importe"}
         </p>
         </div>
-        <div className="flex gap-2">
-          <button
-            onClick={() => setIsEditNameModalOpen(true)} // Abre el modal de edición del nombre
-            className="bg-[#302A73] text-white w-10 h-10 flex justify-center items-center rounded"
-          >
-            <span className="material-symbols-outlined">edit_square</span>
-          </button>
-        </div>
+        
       </div>
-      <div className="mt-6 w-full max-w-lg m-auto">
+      <div className=" w-full max-w-lg m-auto">
         <Bar data={chartData} options={chartOptions} />
 
         <div className="flex justify-between gap-3 mt-1 text-xs">
@@ -217,28 +211,31 @@ const ServiceDetails = () => {
           <div className="flex gap-1 justify-center ">
             <button
               onClick={() => setMonthsToShow(6)}
-              className="bg-gray-600 text-white w-10 flex justify-center items-center px-4 py-2 rounded"
+              className="bg-gray-600 text-white w-10 flex justify-center items-center px-4 py-1 rounded"
             >
               6
             </button>
             <button
               onClick={() => setMonthsToShow(12)}
-              className="bg-gray-600 text-white w-10 flex justify-center items-center px-4 py-2 rounded"
+              className="bg-gray-600 text-white w-10 flex justify-center items-center px-4 py-1 rounded"
             >
               12
             </button>
             <button
               onClick={() => setMonthsToShow(24)}
-              className="bg-gray-600 text-white w-10 flex justify-center items-center px-4 py-2 rounded"
+              className="bg-gray-600 text-white w-10 flex justify-center items-center px-4 py-1 rounded"
             >
               24
             </button>
           </div>
           <button
             onClick={() => setShowConsumption(!showConsumption)} // Cambiar entre importe y consumo
-            className="bg-gray-600 text-white px-4 py-2 rounded"
+            className="bg-gray-600 text-white px-4 py-1 rounded flex items-center gap-2 shadow-md"
           >
-            {showConsumption ? "Ver Importe" : "Ver Consumo"}
+            <span className="material-symbols-outlined">
+bar_chart
+</span>
+            {showConsumption ? "Consumo" : "Importe"}
           </button>
         </div>
       </div>
@@ -246,9 +243,10 @@ const ServiceDetails = () => {
       <div className="mt-14">
         <button
           onClick={handleAddBill}
-          className="bg-[#302A73] mb-6 w-full font-semibold text-white px-4 py-3 rounded"
+          className="bg-[#463DA6] text-white rounded flex justify-center font-semibold items-center w-full p-4 gap-2 shadow-lg mb-6"
         >
-          Agregar Factura
+          <span className="material-symbols-outlined">playlist_add</span>
+          Agregar factura
         </button>
         <ul className="flex flex-col gap-4">
           {sortedBills.map((bill, index) => (

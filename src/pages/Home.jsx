@@ -80,7 +80,7 @@ const Home = () => {
     <div className="w-full inset-0 fixed overflow-y-scroll   ">
       <div className="max-w-4xl mx-auto ">
         <div className="pb-24 bg-gradient-to-tl from-[#5B50D9] to-[#302A73]">
-
+        
        
         {/* Encabezado */}
         <div className="flex items-center gap-3 p-6 justify-end">

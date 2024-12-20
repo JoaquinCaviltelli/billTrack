@@ -129,12 +129,12 @@ const BillModal = ({ isOpen, onClose, onSave, billData, onDelete }) => {
         <div className="flex flex-col justify-end gap-4 mt-20">
           <button
             onClick={handleSave}
-            className="bg-[#463DA6] text-white p-4 rounded"
+            className="bg-[#463DA6] font-medium text-white p-4 rounded"
             >
             {billData ? "Guardar Cambios" : "Agregar Factura"}
           </button>
 
-          <button onClick={onClose} className="bg-white text-[#463DA6] border-[#463DA6] border p-2 rounded">
+          <button onClick={onClose} className="bg-white text-[#463DA6] border-[#463DA6] font-semibold border p-2 rounded">
             Cancelar
           </button>
 

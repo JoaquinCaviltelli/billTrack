@@ -253,7 +253,7 @@ const ExtractoBancario = () => {
             className="bg-[#A63D3D] text-white rounded flex justify-center font-semibold items-center w-full p-4 gap-2 shadow-lg"
           >
             <span className="material-symbols-outlined">playlist_add</span>
-            Agregar
+            Agregar movimiento
           </button>
           {movimientos.length > 0 ? (
             // Agrupar movimientos por mes
@@ -283,7 +283,7 @@ const ExtractoBancario = () => {
                 {/* Mostrar los movimientos de este mes */}
                 {monthMovements.map((mov) => (
                   <div key={mov.id} className="">
-                    <div className="bg-white rounded shadow  mb-2 flex justify-between ">
+                    <div className="bg-white rounded border shadow  mb-2 flex justify-between ">
                       <div className="text-gray-600 flex flex-col px-4 py-2  w-full">
                         <div className="flex w-full justify-between items-start text-gray-600 text-xs font-semibold">
                           <p className="">
