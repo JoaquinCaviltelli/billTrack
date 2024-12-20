@@ -61,7 +61,7 @@ const ServiceDetails = () => {
   const [isEditNameModalOpen, setIsEditNameModalOpen] = useState(false);
 
   const [showConsumption, setShowConsumption] = useState(false); // Estado para cambiar entre importe y consumo
-  const [monthsToShow, setMonthsToShow] = useState(6); // Estado para los meses a mostrar (12, 6, o 24)
+  const [monthsToShow, setMonthsToShow] = useState(12); // Estado para los meses a mostrar (12, 6, o 24)
 
   const handleUpdateServiceName = async () => {
     if (!serviceName.trim()) return alert("El nombre no puede estar vacío");
@@ -182,11 +182,11 @@ const ServiceDetails = () => {
   return (
     <div className="p-6 max-w-5xl m-auto mb-20">
       <div className="flex justify-between my-10 gap-6">
-        <h1 className="text-5xl text-[#463DA6] font-bold">{service?.name}</h1>
+        <h1 className="text-5xl text-[#302A73] font-bold">{service?.name}</h1>
         <div className="flex gap-2">
           <button
             onClick={() => setIsEditNameModalOpen(true)} // Abre el modal de edición del nombre
-            className="bg-[#463DA6] text-white w-10 h-10 flex justify-center items-center rounded"
+            className="bg-[#302A73] text-white w-10 h-10 flex justify-center items-center rounded"
           >
             <span className="material-symbols-outlined">edit_square</span>
           </button>
@@ -200,26 +200,26 @@ const ServiceDetails = () => {
           <div className="flex gap-1 justify-center ">
             <button
               onClick={() => setMonthsToShow(6)}
-              className="bg-gray-500 text-white w-10 flex justify-center items-center px-4 py-2 rounded"
+              className="bg-gray-600 text-white w-10 flex justify-center items-center px-4 py-2 rounded"
             >
               6
             </button>
             <button
               onClick={() => setMonthsToShow(12)}
-              className="bg-gray-500 text-white w-10 flex justify-center items-center px-4 py-2 rounded"
+              className="bg-gray-600 text-white w-10 flex justify-center items-center px-4 py-2 rounded"
             >
               12
             </button>
             <button
               onClick={() => setMonthsToShow(24)}
-              className="bg-gray-500 text-white w-10 flex justify-center items-center px-4 py-2 rounded"
+              className="bg-gray-600 text-white w-10 flex justify-center items-center px-4 py-2 rounded"
             >
               24
             </button>
           </div>
           <button
             onClick={() => setShowConsumption(!showConsumption)} // Cambiar entre importe y consumo
-            className="bg-gray-500 text-white px-4 py-2 rounded"
+            className="bg-gray-600 text-white px-4 py-2 rounded"
           >
             {showConsumption ? "Ver Importe" : "Ver Consumo"}
           </button>
@@ -229,7 +229,7 @@ const ServiceDetails = () => {
       <div className="mt-14">
         <button
           onClick={handleAddBill}
-          className="bg-[#463DA6] mb-6 w-full font-semibold text-white px-4 py-3 rounded"
+          className="bg-[#302A73] mb-6 w-full font-semibold text-white px-4 py-3 rounded"
         >
           Agregar Factura
         </button>
@@ -241,15 +241,15 @@ const ServiceDetails = () => {
             >
               <div className="flex items-center p-4 justify-between">
                 <div className="flex flex-col">
-                  <p className="font-medium text-sm">
+                  <p className="font-semibold text-xs">
                     {monthsInSpanish[bill.month - 1]} {bill.year}
                   </p>
                   <p className="font-bold text-3xl">
                     ${bill.amount.toLocaleString("es-ES")}
                   </p>
-                  <p className="font-medium text-sm">
+                  {/* <p className="font-medium text-sm">
                     Consumo: {bill.consumption}
-                  </p>
+                  </p> */}
                 </div>
 
                 

@@ -34,13 +34,13 @@ const MovimientoModal = ({
         type="date"
         value={fecha}
         onChange={(e) => setFecha(e.target.value)}
-        className="border-b-2 pt-6 pl-2 pb-2 w-full outline-none text-gray-700 font-semibold"
+        className="border-b-2 pt-6 pl-2 pb-2 w-full outline-none text-gray-700 font-semibold bg-white"
         />
 
       <select
         value={tipoMovimiento}
         onChange={(e) => setTipoMovimiento(e.target.value)}
-        className="border-b-2 pt-6 pl-1 pb-2  w-full outline-none text-gray-700 font-semibold"
+        className="border-b-2 pt-6 pl-1 pb-2  w-full outline-none text-gray-700 font-semibold bg-white"
         >
         <option value="Deposito">Deposito (Ingreso)</option>
         <option value="Retiro">Retiro (Ingreso)</option>
