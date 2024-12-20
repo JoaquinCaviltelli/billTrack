@@ -83,20 +83,20 @@ const Home = () => {
 
        
         {/* Encabezado */}
-        <div className="flex items-center gap-3 p-6 justify-between">
+        <div className="flex items-center gap-3 p-6 justify-end">
           <p className="text-white font-semibold">Facturas de servicios</p>
           <Link to="/extracto" className="">
             <span className="material-symbols-outlined text-[#463DA6] text-[34px] bg-white p-3 rounded-full shadow">
-              account_balance
+              docs
             </span>
             
           </Link>
         </div>
 
         {/* Navegación entre meses */}
-        <div className="flex w-full items-center justify-between px-6 mt-12 ">
+        <div className="flex w-full items-center justify-between  mt-12 ">
           <button
-            className="bg-white text-[#463DA6]  w-7 h-7 flex justify-center items-center rounded"
+            className="bg-white text-[#463DA6]  w-10 h-7 flex justify-center items-center rounded-r"
             onClick={() =>
               setCurrentMonth(currentMonth.clone().subtract(1, "month"))
             }
@@ -107,7 +107,7 @@ const Home = () => {
             monthsInSpanish[currentMonth.month()]
           } ${currentMonth.year()}`}</p>
           <button
-            className="bg-white text-[#463DA6] w-7 h-7 flex justify-center items-center rounded"
+            className="bg-white text-[#463DA6] w-10 h-7 flex justify-center items-center rounded-l"
             onClick={() =>
               setCurrentMonth(currentMonth.clone().add(1, "month"))
             }

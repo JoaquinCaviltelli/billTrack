@@ -151,13 +151,13 @@ const ExtractoBancario = () => {
             mov.id === movimientoEditando.id ? movimientoActualizado : mov
           )
         );
+        setModalVisible(false);
         setSaldo(nuevoSaldo);
 
         setMovimientoEditando(null);
         setDescripcion("");
         setMonto("");
         setFecha(moment().format("YYYY-MM-DD"));
-        setModalVisible(false);
         obtenerMovimientos();
       } catch (error) {
         console.error("Error al actualizar movimiento: ", error);
@@ -194,6 +194,11 @@ const ExtractoBancario = () => {
           };
         });
 
+        setModalVisible(false);
+        setMovimientoEditando(null);
+        setDescripcion("");
+        setMonto("");
+        setFecha(moment().format("YYYY-MM-DD"));
       setSaldo(saldoAcumulado);
       setMovimientos(movimientosActualizados);
       obtenerMovimientos();
@@ -220,11 +225,11 @@ const ExtractoBancario = () => {
         <div className="bg-gradient-to-tl from-[#d95050] to-[#732a2a]">
 
         {/* Mostrar saldo final */}
-        <div className="flex items-center gap-3 p-6 justify-between">
+        <div className="flex items-center gap-3 p-6 justify-end">
           <p className="text-white font-semibold">Detalle bancario</p>
           <Link to="/" className="">
             <span className="material-symbols-outlined text-[#A63D3D] text-[34px] bg-white p-3 rounded-full shadow">
-              docs
+            account_balance
             </span>
           </Link>
         </div>

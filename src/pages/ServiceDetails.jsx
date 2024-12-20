@@ -71,10 +71,10 @@ const ServiceDetails = () => {
   };
 
   const handleDeleteService = async () => {
-    if (window.confirm("¿Estás seguro de que deseas eliminar este servicio?")) {
+    
       await deleteService(id);
       navigate("/");
-    }
+    
   };
   const handleAddBill = () => {
     setEditingBillData(false);  // Restablecer los datos cuando se agrega una nueva factura
@@ -97,10 +97,10 @@ const ServiceDetails = () => {
   };
 
   const handleDeleteBill = async (billIndex) => {
-    if (window.confirm("¿Estás seguro de que deseas eliminar esta factura?")) {
+    
       await deleteBill(id, billIndex);
       setIsModalOpen(false);
-    }
+    
   };
 
   const sortedBills =
@@ -125,22 +125,21 @@ const ServiceDetails = () => {
     labels: labels,
     datasets: [
       {
-        label: showConsumption
-          ? "Consumo del servicio"
-          : "Importe del servicio",
+        // Elimina o comenta esta propiedad para que no aparezca la etiqueta de la leyenda
+        // label: showConsumption ? "Consumo del servicio" : "Importe del servicio",
         data: data,
-        backgroundColor: "#463DA6",
-        borderColor: "#463DA6",
-        borderWidth: 1,
+        backgroundColor: "#302A73",
+        borderWidth: 0,
       },
     ],
   };
+  
 
   const chartOptions = {
     responsive: true,
     plugins: {
       legend: {
-        position: "top",
+        display: false, // Oculta la leyenda y el botón de color
       },
       tooltip: {
         callbacks: {
@@ -155,22 +154,32 @@ const ServiceDetails = () => {
     scales: {
       x: {
         grid: {
-          display: false,
+          display: false, // Oculta la cuadrícula horizontal
+        },
+        ticks: {
+          display: true, // Oculta los números del eje X
+        },
+        border: {
+          display: false, // Oculta el borde del gráfico en el eje X (si es necesario)
         },
       },
       y: {
         grid: {
-          display: false,
+          display: false, // Oculta la cuadrícula vertical
         },
         ticks: {
+          display: false, // Oculta los números del eje Y
           beginAtZero: true,
-          callback: (value) => `$${value.toLocaleString("es-ES")}`,
+          
+        },
+        border: {
+          display: false, // Oculta el borde del gráfico en el eje Y (si es necesario)
         },
       },
     },
     elements: {
       bar: {
-        borderWidth: 2,
+        borderWidth: 0, // Elimina el borde de las barras (si lo hay)
       },
     },
     animation: {
@@ -178,11 +187,19 @@ const ServiceDetails = () => {
       easing: "easeInOutQuad",
     },
   };
+  
+  
 
   return (
     <div className="p-6 max-w-5xl m-auto mb-20">
-      <div className="flex justify-between my-10 gap-6">
+      <div className="flex justify-between mt-8  gap-6">
+        <div>
+
         <h1 className="text-5xl text-[#302A73] font-bold">{service?.name}</h1>
+        <p className="text-[#463DA6] font-semibold text-right">
+        {showConsumption ? "Consumo" : "Importe"}
+        </p>
+        </div>
         <div className="flex gap-2">
           <button
             onClick={() => setIsEditNameModalOpen(true)} // Abre el modal de edición del nombre
@@ -260,7 +277,7 @@ const ServiceDetails = () => {
                     onClick={() => handleEditBill(bill, index)}
                     className="bg-[#463DA6] text-white p-1 flex justify-center items-center rounded-r"
                   >
-                    <span className="material-symbols-outlined">
+                    <span className="material-symbols-outlined text-xl">
                       edit_square
                     </span>
                   </button>
